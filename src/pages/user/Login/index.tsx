@@ -54,6 +54,7 @@ const Login: React.FC = () => {
         ...initialState,
         currentUser: userInfo,
       });
+      localStorage.setItem('currentUser',JSON.stringify(userInfo));
     }
   };
 
