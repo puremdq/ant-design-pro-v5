@@ -6,6 +6,7 @@ import {stringify} from 'querystring';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 import {outLogin} from '@/services/ant-design-pro/api';
+import {afterLogout} from "@/utils/permission";
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
@@ -18,7 +19,7 @@ const loginOut = async () => {
   await outLogin();
   const {query = {}, pathname} = history.location;
   const {redirect} = query;
-  localStorage.removeItem('currentUser');
+  afterLogout();
   // Note: There may be security issues, please note
   if (window.location.pathname !== '/user/login' && !redirect) {
     history.replace({

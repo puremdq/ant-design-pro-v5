@@ -15,6 +15,7 @@ import { login } from '@/services/ant-design-pro/api';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
 
 import styles from './index.less';
+import {afterLogin} from "@/utils/permission";
 
 const LoginMessage: React.FC<{
   content: string;
@@ -54,7 +55,7 @@ const Login: React.FC = () => {
         ...initialState,
         currentUser: userInfo,
       });
-      localStorage.setItem('currentUser',JSON.stringify(userInfo));
+      afterLogin(userInfo);
     }
   };
 

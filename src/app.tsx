@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import type {ResponseError} from 'umi-request';
 import {currentUser as queryCurrentUser} from './services/ant-design-pro/api';
 import {BookOutlined, LinkOutlined} from '@ant-design/icons';
+import {getCurrentUser} from "@/utils/permission";
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -36,7 +37,7 @@ export async function getInitialState(): Promise<{
   };
   // 如果是登录页面，不执行
   if (history.location.pathname !== loginPath) {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser") as string);
+    const currentUser = getCurrentUser();
     return {
       fetchUserInfo,
       currentUser,
