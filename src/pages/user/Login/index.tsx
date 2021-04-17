@@ -64,12 +64,18 @@ const Login: React.FC = () => {
     try {
       // 登录
       const msg = await login({ ...values, type });
-      if (msg.status === 'ok') {
+      if (msg.success)  {
         message.success('登录成功！');
         await fetchUserInfo();
         goto();
         return;
       }
+      setUserLoginState(
+        {
+          success:msg.success,
+          type,
+        }
+      )
       // 如果失败去设置用户错误信息
       setUserLoginState(msg);
     } catch (error) {
@@ -77,7 +83,7 @@ const Login: React.FC = () => {
     }
     setSubmitting(false);
   };
-  const { status, type: loginType } = userLoginState;
+  const { success,type: loginType} = userLoginState;
 
   return (
     <div className={styles.container}>
@@ -135,7 +141,7 @@ const Login: React.FC = () => {
               />
             </Tabs>
 
-            {status === 'error' && loginType === 'account' && (
+            {!success && loginType === 'account' && (
               <LoginMessage
                 content={intl.formatMessage({
                   id: 'pages.login.accountLogin.errorMessage',
@@ -192,7 +198,7 @@ const Login: React.FC = () => {
               </>
             )}
 
-            {status === 'error' && loginType === 'mobile' && <LoginMessage content="验证码错误" />}
+            {!success && loginType === 'mobile' && <LoginMessage content="验证码错误" />}
             {type === 'mobile' && (
               <>
                 <ProFormText

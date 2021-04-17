@@ -24,9 +24,15 @@ declare namespace API {
   };
 
   type LoginResult = {
-    status?: string;
+    success?: boolean;
     type?: string;
-    currentAuthority?: string;
+  };
+
+  type RequestResult = {
+    code?: integer;
+    data?: any;
+    msg?: string;
+    success?: boolean;
   };
 
   type PageParams = {
