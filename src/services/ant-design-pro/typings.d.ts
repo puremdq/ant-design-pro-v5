@@ -28,7 +28,7 @@ declare namespace API {
     type?: string;
   };
 
-  type RequestResult = {
+  type ServerResponse = {
     code?: integer;
     data?: any;
     msg?: string;

@@ -1,10 +1,10 @@
 // @ts-ignore
 /* eslint-disable */
-import {request} from 'umi';
+import { request } from 'umi';
 
 /** 获取当前的用户 GET /api/currentUser */
 export async function currentUser(options?: { [key: string]: any }) {
-  return request<API.CurrentUser>('/api/currentUser', {
+  return request<API.ServerResponse>('/proxy/currentUser', {
     method: 'GET',
     ...(options || {}),
   });
@@ -12,15 +12,15 @@ export async function currentUser(options?: { [key: string]: any }) {
 
 /** 登录接口 POST /api/login/outLogin */
 export async function outLogin(options?: { [key: string]: any }) {
-  return request<Record<string, any>>('/api/login/outLogin', {
+  return request<Record<string, any>>('/proxy/logout', {
     method: 'POST',
     ...(options || {}),
   });
 }
 
 /** 登录接口 POST /api/login/account */
-export async function login(body: API.LoginParams, options?: { [key: string]: any })  {
-  return request<API.RequestResult>('/proxy/login', {
+export async function login(body: API.LoginParams, options?: { [key: string]: any }) {
+  return request<API.ServerResponse>('/proxy/login', {
     method: 'POST',
     headers: {
       // 'Content-Type': 'application/json',
