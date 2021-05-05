@@ -35,6 +35,7 @@ export async function getInitialState(): Promise<{
       return {
         name: res.data.username,
         title: res.data.name,
+        access: res.data.role,
       };
     } catch (error) {
       history.push(loginPath);

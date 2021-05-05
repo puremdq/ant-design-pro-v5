@@ -3,7 +3,8 @@
  * */
 export default function access(initialState: { currentUser?: API.CurrentUser | undefined }) {
   const { currentUser } = initialState || {};
+  const s = currentUser?.access as any;
   return {
-    canAdmin: currentUser && currentUser.access === 'admin',
+    admin: s instanceof Array ? s.includes('admin') : false,
   };
 }
